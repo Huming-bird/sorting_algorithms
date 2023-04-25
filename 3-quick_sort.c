@@ -60,6 +60,7 @@ int part(int *array, int l, int r)
 			tmp = array[swap];
 			array[swap] = array[j];
 			array[j] = tmp;
+			print_array(array, r + 1);
 		}
 	}
 	tm = array[swap + 1];
