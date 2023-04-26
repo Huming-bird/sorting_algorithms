@@ -43,10 +43,11 @@ void print_array_elmt(int elmt)
  * Return: int value
  */
 
-int part(int *array, int l, int r)
+int part(int *array, int l, int r, size_t size)
 {
 	int pivot_index, pivot, tm, tmp, swap, j;
-
+	size_t k;
+	/*int size = sizeof(array) / sizeof(int);*/
 
 	pivot_index = r;
 	pivot = array[r];
@@ -60,7 +61,16 @@ int part(int *array, int l, int r)
 			tmp = array[swap];
 			array[swap] = array[j];
 			array[j] = tmp;
-			print_array(array, r + 1);
+			for (k = 0; k < size; k++)
+			{
+				print_array_elmt(array[k]);
+				if (k != size - 1)
+				{
+					putchar(',');
+					putchar(' ');
+				}
+			}
+		putchar('\n');
 		}
 	}
 	tm = array[swap + 1];
@@ -87,7 +97,7 @@ void quick_sort(int *array, size_t size)
 		return;
 	}
 
-	pivot_index = part(array, 0, size - 1);
+	pivot_index = part(array, 0, size - 1, size);
 
 	quick_sort(array, pivot_index);
 	quick_sort(&array[pivot_index + 1], size - pivot_index - 1);
